@@ -24,9 +24,12 @@ public class MainWindow {
     private String mainCharacter;
     private JPanel spaces = new JPanel();
     private ClickListener clickListener = ClickListener.getInstance();
+    private JPanel j;
 
     public MainWindow() {
         frame.setTitle("Counter-Strike 2.0");
+        frame.setLayout(new BorderLayout());
+        frame.setContentPane(new JLabel(new ImageIcon("res\\background\\backgroundStart.jpg")));
 
         // screen size and position center
         Dimension screenDimension = frame.getToolkit().getScreenSize();
@@ -35,8 +38,14 @@ public class MainWindow {
         frame.setSize(windowDimension);
         frame.setLocation(windowLocation);
 
-        frame.setLayout(new BorderLayout());
-        frame.add(canvas, BorderLayout.CENTER);
+        frame.setLayout(new FlowLayout());
+//        try {
+//            Image back = ImageIO.read(new File("res\\background\\backgroundStart.jpg"));
+//            frame.add(new JLabel(new ImageIcon(back)));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
 
         //we need more space
         spaces.setLayout(new BorderLayout());
@@ -44,18 +53,25 @@ public class MainWindow {
         space.setFont(new Font("SansSerif", Font.BOLD, 100));
 
         chooseCharacter = new JLabel("Choose your character", SwingConstants.CENTER);
+        spaces.setOpaque(false);
+        canvas.setOpaque(false);
         chooseCharacter.setFont(new Font("SansSerif", Font.BOLD, 50));
 
         spaces.add(chooseCharacter, BorderLayout.CENTER);
         spaces.add(space, BorderLayout.SOUTH);
 
-        frame.add(spaces, BorderLayout.NORTH);
+
 
         canvas.setLayout(new FlowLayout());
 
         // selection character buttons
         createCharacters();
-
+        j = new JPanel();
+        j.setOpaque(false);
+        j.setLayout(new BorderLayout());
+        j.add(canvas, BorderLayout.CENTER);
+        j.add(spaces, BorderLayout.NORTH);
+        frame.add(j);
         frame.setVisible(true);
     }
 
@@ -71,6 +87,11 @@ public class MainWindow {
         animationStartButtons.stop();
         spaces.removeAll();
         canvas.removeAll();
+        j.removeAll();
+
+        j.add(FAQWindow.getInstance(),BorderLayout.CENTER);
+
+        frame.revalidate();
         frame.repaint();
     }
 

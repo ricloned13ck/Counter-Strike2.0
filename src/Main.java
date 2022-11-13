@@ -3,6 +3,5 @@ public class Main {
         MainWindow.getInstance();
         AnimationStartButtons animationStartButtons=AnimationStartButtons.getInstance();
         animationStartButtons.start();
-
     }
 }
