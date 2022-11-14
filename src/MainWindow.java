@@ -29,7 +29,7 @@ public class MainWindow {
     public MainWindow() {
         frame.setTitle("Counter-Strike 2.0");
         frame.setLayout(new BorderLayout());
-        frame.setContentPane(new JLabel(new ImageIcon("res\\background\\backgroundStart.jpg")));
+
 
         // screen size and position center
         Dimension screenDimension = frame.getToolkit().getScreenSize();
@@ -37,14 +37,16 @@ public class MainWindow {
         Point windowLocation = new Point(screenDimension.width / 4, screenDimension.height / 4);
         frame.setSize(windowDimension);
         frame.setLocation(windowLocation);
+        try {
+            Image img = (Image) ImageIO.read(new File("res\\background\\1.png"));
+            img.getScaledInstance(5, 100, Image.SCALE_SMOOTH);
+            JLabel back = new JLabel(new ImageIcon(img));
+            frame.setContentPane(back);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         frame.setLayout(new FlowLayout());
-//        try {
-//            Image back = ImageIO.read(new File("res\\background\\backgroundStart.jpg"));
-//            frame.add(new JLabel(new ImageIcon(back)));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
 
         //we need more space
