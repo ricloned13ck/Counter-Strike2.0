@@ -21,60 +21,67 @@ public class MainWindow {
     private JLabel chooseCharacter;
     public LinkedList<JButton> characters = new LinkedList<>();
     public String[] characterImages = {"Woodcutter", "Cyborg", "LaraCroft"};
-    private String mainCharacter;
+    public String mainCharacter;
     private JPanel spaces = new JPanel();
     private ClickListener clickListener = ClickListener.getInstance();
-    private JPanel j;
+    public JPanel j;
+    public Dimension screenDimension;
+    private CharacterGame characterGame;
+    private GameCanvas gameCanvas;
+    CharacterKeyListener keyListener = CharacterKeyListener.getInstance();
+
 
     public MainWindow() {
         frame.setTitle("Counter-Strike 2.0");
         frame.setLayout(new BorderLayout());
+        frame.setResizable(false);
+
 
 
         // screen size and position center
-        Dimension screenDimension = frame.getToolkit().getScreenSize();
+        screenDimension = frame.getToolkit().getScreenSize();
         Dimension windowDimension = new Dimension(screenDimension.width / 2, screenDimension.height / 2);
         Point windowLocation = new Point(screenDimension.width / 4, screenDimension.height / 4);
         frame.setSize(windowDimension);
         frame.setLocation(windowLocation);
         try {
-            Image img = (Image) ImageIO.read(new File("res\\background\\1.png"));
-            img.getScaledInstance(5, 100, Image.SCALE_SMOOTH);
-            JLabel back = new JLabel(new ImageIcon(img));
+            Image img = (Image) ImageIO.read(new File("res\\background\\Background.png"));
+            JLabel back = new JLabel(new ImageIcon(img.getScaledInstance(screenDimension.width / 2, screenDimension.height / 2, Image.SCALE_SMOOTH)));
             frame.setContentPane(back);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        frame.setLayout(new FlowLayout());
+        frame.setLayout(new GridLayout(1,3));
 
 
         //we need more space
-        spaces.setLayout(new BorderLayout());
+        spaces.setLayout(new GridLayout(3,1));
         JLabel space = new JLabel("\n");
-        space.setFont(new Font("SansSerif", Font.BOLD, 100));
+        space.setFont(new Font("SansSerif", Font.BOLD, 250));
 
         chooseCharacter = new JLabel("Choose your character", SwingConstants.CENTER);
         spaces.setOpaque(false);
         canvas.setOpaque(false);
-        chooseCharacter.setFont(new Font("SansSerif", Font.BOLD, 50));
+        chooseCharacter.setFont(new Font("SansSerif", Font.BOLD, 40));
 
-        spaces.add(chooseCharacter, BorderLayout.CENTER);
-        spaces.add(space, BorderLayout.SOUTH);
-
+        spaces.add(chooseCharacter);
 
 
-        canvas.setLayout(new FlowLayout());
+        canvas.setLayout(new GridLayout(1,45));
 
         // selection character buttons
         createCharacters();
         j = new JPanel();
         j.setOpaque(false);
-        j.setLayout(new BorderLayout());
-        j.add(canvas, BorderLayout.CENTER);
-        j.add(spaces, BorderLayout.NORTH);
+        j.setLayout(new GridLayout(3,1));
+        j.add(spaces);
+        j.add(space);
+        j.add(canvas);
+
         frame.add(j);
         frame.setVisible(true);
+
     }
 
     // starting game
@@ -90,8 +97,26 @@ public class MainWindow {
         spaces.removeAll();
         canvas.removeAll();
         j.removeAll();
+        j.setLayout(new BorderLayout());
+        j.add(FAQWindow.getInstance(), BorderLayout.NORTH);
 
-        j.add(FAQWindow.getInstance(),BorderLayout.CENTER);
+        gameCanvas = GameCanvas.getInstance();
+        gameCanvas.setOpaque(false);
+
+        j.add(gameCanvas, BorderLayout.CENTER);
+
+
+        try {
+            Image img = (Image) ImageIO.read(new File("res\\background\\ground.png"));
+            JLabel pole = new JLabel(new ImageIcon(img.getScaledInstance(screenDimension.width / 2, 25, Image.SCALE_SMOOTH)));
+            j.add(pole, BorderLayout.SOUTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(keyListener);
+        AnimationWalk.getInstance().start();
 
         frame.revalidate();
         frame.repaint();

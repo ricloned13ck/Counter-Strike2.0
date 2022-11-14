@@ -1,7 +1,8 @@
 public class Main {
     public static void main(String[] args) {
         MainWindow.getInstance();
-        AnimationStartButtons animationStartButtons=AnimationStartButtons.getInstance();
+        AnimationStartButtons animationStartButtons = AnimationStartButtons.getInstance();
         animationStartButtons.start();
+
     }
 }

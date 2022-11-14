@@ -11,18 +11,18 @@ public class FAQWindow extends JPanel {
     }
 
     FAQWindow() {
-        setLayout(new GridLayout(15, 15));
+        setLayout(new GridLayout(1, 3));
 
-        JLabel skip = new JLabel("Press L to skip instruction");
+        JLabel skip = new JLabel("<html>Press <font color='green'>L</font> to skip instruction</html>",SwingConstants.CENTER);
         skip.setFont(new Font("SansSerif", Font.BOLD, 15));
         add(skip);
 
-        JLabel jump = new JLabel("<html>Press <font color='red'>SPACE</font> to jump</html>", SwingConstants.CENTER);
-        jump.setFont(new Font("SansSerif", Font.BOLD, 35));
+        JLabel jump = new JLabel("<html>Press <font color='green'>SPACE</font> to jump</html>", SwingConstants.CENTER);
+        jump.setFont(new Font("SansSerif", Font.BOLD, 21));
         add(jump);
 
-        JLabel next =new JLabel("Press C to continue", SwingConstants.CENTER);
-        next.setFont(new Font("SansSerif", Font.BOLD, 20));
+        JLabel next =new JLabel("<html>Press <font color='green'>C</font> to continue</html>", SwingConstants.CENTER);
+        next.setFont(new Font("SansSerif", Font.BOLD, 15));
         add(next);
         setOpaque(false);
 

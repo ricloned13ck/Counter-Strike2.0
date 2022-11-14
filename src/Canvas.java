@@ -10,4 +10,8 @@ public class Canvas extends JPanel {
         return instance;
     }
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
 }
