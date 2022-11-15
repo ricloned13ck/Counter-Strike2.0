@@ -29,6 +29,9 @@ public class MainWindow {
     private CharacterGame characterGame;
     private GameCanvas gameCanvas;
     CharacterKeyListener keyListener = CharacterKeyListener.getInstance();
+    public String nowPos="RIGHT";
+    public boolean flagWalk=false;
+    public boolean flagIdle=true;
 
 
     public MainWindow() {
@@ -104,6 +107,7 @@ public class MainWindow {
         gameCanvas.setOpaque(false);
 
         j.add(gameCanvas, BorderLayout.CENTER);
+        AnimationIdle.getInstance().start();
 
 
         try {

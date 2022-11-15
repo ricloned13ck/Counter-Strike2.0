@@ -33,6 +33,7 @@ public class CharacterGame extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
     public void setPos(int x, int y){
         this.x=x;
@@ -52,6 +53,10 @@ public class CharacterGame extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(character.getScaledInstance(60, 100, Image.SCALE_DEFAULT), x, y, null);
+        g.drawImage(character.getScaledInstance(character.getWidth(null)*3, character.getHeight(null)*3, Image.SCALE_DEFAULT), x, y, null);
+    }
+
+    public void setCharacter(Image character) {
+        this.character = character;
     }
 }
