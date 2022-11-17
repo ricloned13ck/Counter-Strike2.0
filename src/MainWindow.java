@@ -1,10 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MainWindow {
@@ -29,16 +27,19 @@ public class MainWindow {
     private CharacterGame characterGame;
     private GameCanvas gameCanvas;
     CharacterKeyListener keyListener = CharacterKeyListener.getInstance();
-    public String nowPos="RIGHT";
-    public boolean flagWalk=false;
-    public boolean flagIdle=true;
+    public String nowPos = "RIGHT";
 
+    // flags for animation
+    public boolean isWalk = false;
+    public boolean isIdle = true;
+    public boolean isAttack = false;
+    public boolean isDamaged = false;
+    public boolean isJump = false;
 
     public MainWindow() {
         frame.setTitle("Counter-Strike 2.0");
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
-
 
 
         // screen size and position center
@@ -55,11 +56,11 @@ public class MainWindow {
             throw new RuntimeException(e);
         }
 
-        frame.setLayout(new GridLayout(1,3));
+        frame.setLayout(new GridLayout(1, 3));
 
 
         //we need more space
-        spaces.setLayout(new GridLayout(3,1));
+        spaces.setLayout(new GridLayout(3, 1));
         JLabel space = new JLabel("\n");
         space.setFont(new Font("SansSerif", Font.BOLD, 250));
 
@@ -71,13 +72,13 @@ public class MainWindow {
         spaces.add(chooseCharacter);
 
 
-        canvas.setLayout(new GridLayout(1,45));
+        canvas.setLayout(new GridLayout(1, 45));
 
         // selection character buttons
         createCharacters();
         j = new JPanel();
         j.setOpaque(false);
-        j.setLayout(new GridLayout(3,1));
+        j.setLayout(new GridLayout(3, 1));
         j.add(spaces);
         j.add(space);
         j.add(canvas);
@@ -107,12 +108,11 @@ public class MainWindow {
         gameCanvas.setOpaque(false);
 
         j.add(gameCanvas, BorderLayout.CENTER);
-        AnimationIdle.getInstance().start();
 
 
         try {
             Image img = (Image) ImageIO.read(new File("res\\background\\ground.png"));
-            JLabel pole = new JLabel(new ImageIcon(img.getScaledInstance(screenDimension.width / 2, 25, Image.SCALE_SMOOTH)));
+            JLabel pole = new JLabel(new ImageIcon(img.getScaledInstance(screenDimension.width / 2, 40, Image.SCALE_SMOOTH)));
             j.add(pole, BorderLayout.SOUTH);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -120,7 +120,8 @@ public class MainWindow {
 
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(keyListener);
-        AnimationWalk.getInstance().start();
+        Walk.getInstance().start();
+        AnimationCharacter.getInstance().start();
 
         frame.revalidate();
         frame.repaint();

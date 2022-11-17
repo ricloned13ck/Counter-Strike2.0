@@ -15,24 +15,24 @@ public class CharacterGame extends JPanel {
 
     private int width, height;
     private int x,y;
-    public boolean flag = true;
 
 
-    private Image character;
+    public Image character;
     private MainWindow mainWindow = MainWindow.getInstance();
 
     private CharacterGame() {
         super(true);
 
-        this.width = mainWindow.j.getWidth();
-        this.height = mainWindow.j.getHeight();
-        this.x = width / 2;
-        this.y = height-150;
+
         try {
             this.character = (Image) ImageIO.read(new File("res\\sprites\\" + mainWindow.mainCharacter + ".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        this.width = mainWindow.j.getWidth();
+        this.height = mainWindow.j.getHeight();
+        this.x = width / 2;
+        this.y = height-character.getHeight(null)*2 - 70;
 
     }
     public void setPos(int x, int y){
@@ -53,7 +53,7 @@ public class CharacterGame extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(character.getScaledInstance(character.getWidth(null)*3, character.getHeight(null)*3, Image.SCALE_DEFAULT), x, y, null);
+        g.drawImage(character.getScaledInstance(character.getWidth(null)*2, character.getHeight(null)*2, Image.SCALE_DEFAULT), x, y, null);
     }
 
     public void setCharacter(Image character) {

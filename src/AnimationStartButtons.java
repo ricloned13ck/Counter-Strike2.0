@@ -19,19 +19,16 @@ public class AnimationStartButtons extends Thread {
     public void run() {
         int animation = 1;
         while (true) {
-            for (int i = 0; i < MainWindow.getInstance().characters.size(); i++) {
-                Image image = null;
-                try {
+            try {
+                for (int i = 0; i < MainWindow.getInstance().characters.size(); i++) {
+                    Image image = null;
                     image = (Image) ImageIO.read(new File("res\\sprites\\idle\\" + MainWindow.getInstance().characterImages[i] + animation % 4 + ".png"));
                     MainWindow.getInstance().characters.get(i).setIcon(new ImageIcon(image.getScaledInstance(60, 100, Image.SCALE_DEFAULT)));
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
                 }
-            }
-            animation++;
-            try {
+                animation++;
                 Thread.sleep(150);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
