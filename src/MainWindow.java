@@ -33,8 +33,9 @@ public class MainWindow {
     public boolean isWalk = false;
     public boolean isIdle = true;
     public boolean isAttack = false;
-    public boolean isDamaged = false;
+    public boolean isDamage = false;
     public boolean isJump = false;
+    public boolean isDeath = false;
 
     public MainWindow() {
         frame.setTitle("Counter-Strike 2.0");
