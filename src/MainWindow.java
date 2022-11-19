@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class MainWindow {
-    private static MainWindow instance = null;
+    public static MainWindow instance = null;
 
     public static MainWindow getInstance() {
         if (instance == null)
@@ -28,6 +28,7 @@ public class MainWindow {
     private GameCanvas gameCanvas;
     CharacterKeyListener keyListener = CharacterKeyListener.getInstance();
     public String nowPos = "RIGHT";
+    public int nowLayout =1 ;
 
     // flags for animation
     public boolean isWalk = false;
@@ -41,6 +42,8 @@ public class MainWindow {
         frame.setTitle("Counter-Strike 2.0");
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
         // screen size and position center
@@ -90,7 +93,7 @@ public class MainWindow {
     }
 
     // starting game
-    protected void changeFirstLayout(int x) {
+    protected void firstLayout(int x) {
         if (x == 1)
             this.mainCharacter = "Woodcutter";
         if (x == 2)
@@ -121,8 +124,27 @@ public class MainWindow {
 
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(keyListener);
+
+        frame.addMouseListener(new CharacterMouseListener());
+
         Walk.getInstance().start();
         AnimationCharacter.getInstance().start();
+
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    protected void secondLayout(){
+        FAQWindow.getInstance().changeTextJump();
+        j.repaint();
+    }
+    protected void thirdLayout(){
+        FAQWindow.getInstance().changeTextWalk();
+        j.repaint();
+    }
+    protected void fourthLayout(){
+        FAQWindow.getInstance().changeTextAttack();
+
 
         frame.revalidate();
         frame.repaint();
@@ -149,5 +171,15 @@ public class MainWindow {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void newGame(){
+        instance = null;
+        spaces.removeAll();
+        canvas.removeAll();
+        gameCanvas.removeAll();
+        j.removeAll();
+        Walk.getInstance().stop();
+        AnimationCharacter.getInstance().stop();
     }
 }

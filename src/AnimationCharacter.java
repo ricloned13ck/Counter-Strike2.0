@@ -54,8 +54,15 @@ public class AnimationCharacter extends Thread {
                     Thread.sleep(65);
                 } else if (MainWindow.getInstance().isDamage) {
                     if (damage % 4 == 0) {
-                        MainWindow.getInstance().isIdle = true;
-                        MainWindow.getInstance().isDamage = false;
+                        MainWindow.getInstance().isDamage=false;
+                        if (Walk.getInstance().x==0){
+                            MainWindow.getInstance().isIdle = true;
+                            MainWindow.getInstance().isWalk = false;
+                        }
+                        else{
+                            MainWindow.getInstance().isIdle = false;
+                            MainWindow.getInstance().isWalk = true;
+                        }
                         continue;
                     }
                     if (Objects.equals(MainWindow.getInstance().nowPos, "RIGHT"))
@@ -72,7 +79,7 @@ public class AnimationCharacter extends Thread {
                         MainWindow.getInstance().isDeath = false;
                         int result = JOptionPane.showConfirmDialog(Frame.getInstance(), "Вы проиграли, хотите начать заново?");
                         if (result == JOptionPane.YES_OPTION) {
-                            //TODO: new game
+                            MainWindow.getInstance().newGame();
                         }
                         else System.exit(0);
                     }
@@ -95,7 +102,7 @@ public class AnimationCharacter extends Thread {
                             MainWindow.getInstance().isIdle = false;
                             MainWindow.getInstance().isWalk = true;
                         }
-
+                        continue;
                     }
 
                     if (Objects.equals(MainWindow.getInstance().nowPos, "RIGHT"))

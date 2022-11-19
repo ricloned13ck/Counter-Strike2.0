@@ -44,6 +44,7 @@ public class Jump extends Thread {
                 }
 
                 MainWindow.getInstance().isJump =false;
+                MainWindow.getInstance().isAttack=false;
                 return;
             }
             b += 1;

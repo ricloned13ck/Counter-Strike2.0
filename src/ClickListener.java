@@ -13,6 +13,6 @@ public class ClickListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainWindow.getInstance().changeFirstLayout(Integer.parseInt(e.getActionCommand()));
+        MainWindow.getInstance().firstLayout(Integer.parseInt(e.getActionCommand()));
     }
 }
