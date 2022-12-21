@@ -28,7 +28,7 @@ public class MainWindow {
     private GameCanvas gameCanvas;
     CharacterKeyListener keyListener = CharacterKeyListener.getInstance();
     public String nowPos = "RIGHT";
-    public int nowLayout =1 ;
+    public int nowLayout = 1;
 
     // flags for animation
     public boolean isWalk = false;
@@ -52,8 +52,10 @@ public class MainWindow {
         Point windowLocation = new Point(screenDimension.width / 4, screenDimension.height / 4);
         frame.setSize(windowDimension);
         frame.setLocation(windowLocation);
+
+
         try {
-            Image img = (Image) ImageIO.read(new File("res\\background\\Background.png"));
+            Image img = (Image) ImageIO.read(new File("res//background//Background.png"));
             JLabel back = new JLabel(new ImageIcon(img.getScaledInstance(screenDimension.width / 2, screenDimension.height / 2, Image.SCALE_SMOOTH)));
             frame.setContentPane(back);
         } catch (IOException e) {
@@ -68,7 +70,7 @@ public class MainWindow {
         JLabel space = new JLabel("\n");
         space.setFont(new Font("SansSerif", Font.BOLD, 250));
 
-        chooseCharacter = new JLabel("Choose your character", SwingConstants.CENTER);
+        chooseCharacter = new JLabel("Выберите персонажа", SwingConstants.CENTER);
         spaces.setOpaque(false);
         canvas.setOpaque(false);
         chooseCharacter.setFont(new Font("SansSerif", Font.BOLD, 40));
@@ -89,6 +91,12 @@ public class MainWindow {
 
         frame.add(j);
         frame.setVisible(true);
+
+        int flag = JOptionPane.showConfirmDialog(frame, "<html>В игре Вы должны убивать <font color='red'>монстров</font>, которые будут в Вас стрелять, Вам необходимо <br>перепрыгивать их пули, чтобы не умереть <font color='green'>(у вас будет 3 жизни)</font>. <font color='red'>Монстр</font> умирает после <font color='green'>трех</font> ударов оружием.<br><br>Для начала игры выберите персонажа, за которого хотите играть<br>Чтобы бегать используйте клавиши <font color='blue'>WASD</font> или <font color='blue'>стрелочки</font><br>Для прыжка используйте <font color='blue'>SPACE</font><br>Для атаки используйте <font color='blue'>K</font> или <font color='blue'>CTRL</font><br></html>");
+        if (flag != 0) {
+            System.exit(0);
+        }
+
 
     }
 
@@ -115,7 +123,7 @@ public class MainWindow {
 
 
         try {
-            Image img = (Image) ImageIO.read(new File("res\\background\\ground.png"));
+            Image img = (Image) ImageIO.read(new File("res//background//ground.png"));
             JLabel pole = new JLabel(new ImageIcon(img.getScaledInstance(screenDimension.width / 2, 40, Image.SCALE_SMOOTH)));
             j.add(pole, BorderLayout.SOUTH);
         } catch (IOException e) {
@@ -125,27 +133,17 @@ public class MainWindow {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(keyListener);
 
-        frame.addMouseListener(new CharacterMouseListener());
 
         Walk.getInstance().start();
         AnimationCharacter.getInstance().start();
+        AnimationMonster.getInstance().start();
+        BulletFlying.getInstance().start();
 
         frame.revalidate();
         frame.repaint();
     }
 
-    protected void secondLayout(){
-        FAQWindow.getInstance().changeTextJump();
-        j.repaint();
-    }
-    protected void thirdLayout(){
-        FAQWindow.getInstance().changeTextWalk();
-        j.repaint();
-    }
-    protected void fourthLayout(){
-        FAQWindow.getInstance().changeTextAttack();
-
-
+    protected void secondLayout() {
         frame.revalidate();
         frame.repaint();
     }
@@ -155,7 +153,7 @@ public class MainWindow {
         for (int i = 0; i < characterImages.length; i++) {
             Image image = null;
             try {
-                image = (Image) ImageIO.read(new File("res\\sprites\\" + characterImages[i] + ".png"));
+                image = (Image) ImageIO.read(new File("res//sprites//" + characterImages[i] + ".png"));
                 JButton button = new JButton(new ImageIcon(image.getScaledInstance(60, 100, Image.SCALE_DEFAULT)));
                 button.setContentAreaFilled(false);
                 button.setFocusPainted(false);
@@ -173,13 +171,4 @@ public class MainWindow {
         }
     }
 
-    public void newGame(){
-        instance = null;
-        spaces.removeAll();
-        canvas.removeAll();
-        gameCanvas.removeAll();
-        j.removeAll();
-        Walk.getInstance().stop();
-        AnimationCharacter.getInstance().stop();
-    }
 }

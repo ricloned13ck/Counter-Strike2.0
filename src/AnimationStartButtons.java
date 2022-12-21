@@ -22,11 +22,11 @@ public class AnimationStartButtons extends Thread {
             try {
                 for (int i = 0; i < MainWindow.getInstance().characters.size(); i++) {
                     Image image = null;
-                    image = (Image) ImageIO.read(new File("res\\sprites\\idle\\" + MainWindow.getInstance().characterImages[i] + animation % 4 + ".png"));
+                    image = (Image) ImageIO.read(new File("res//sprites//idle//" + MainWindow.getInstance().characterImages[i] + animation % 4 + ".png"));
                     MainWindow.getInstance().characters.get(i).setIcon(new ImageIcon(image.getScaledInstance(60, 100, Image.SCALE_DEFAULT)));
                 }
                 animation++;
-                Thread.sleep(150);
+                Thread.sleep(200);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {

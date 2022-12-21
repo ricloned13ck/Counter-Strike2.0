@@ -25,7 +25,7 @@ public class CharacterGame extends JPanel {
 
 
         try {
-            this.character = (Image) ImageIO.read(new File("res\\sprites\\" + mainWindow.mainCharacter + ".png"));
+            this.character = (Image) ImageIO.read(new File("res//sprites//" + mainWindow.mainCharacter + ".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -58,5 +58,15 @@ public class CharacterGame extends JPanel {
 
     public void setCharacter(Image character) {
         this.character = character;
+    }
+
+    public void minusHealth(){
+        FAQWindow.getInstance().health--;
+        if (FAQWindow.getInstance().health==2)
+            FAQWindow.getInstance().twoHealth();
+        else if(FAQWindow.getInstance().health==1)
+            FAQWindow.getInstance().oneHealth();
+        else
+            FAQWindow.getInstance().zeroHealth();
     }
 }

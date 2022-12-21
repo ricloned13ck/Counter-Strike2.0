@@ -52,7 +52,7 @@ public class Jump extends Thread {
             int y1 = characterGame.getY() + y;
             characterGame.setPos(characterGame.getX(), y1);
             try {
-                Thread.sleep(1);
+                Thread.sleep(4);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

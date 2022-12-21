@@ -14,5 +14,7 @@ public class GameCanvas extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         CharacterGame.getInstance().paint(g);
+        BulletGame.getInstance().paint(g);
+        MonsterGame.getInstance().paint(g);
     }
 }

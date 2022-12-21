@@ -13,53 +13,89 @@ public class FAQWindow extends JPanel {
         return instance;
     }
 
-    private JLabel skip;
-    private JLabel content;
-    private JLabel next;
+    public JLabel content;
     public JLabel fullHeart;
-    public JLabel notFullHeart1;
-    public JLabel notFullHeart2;
-    public JLabel zeroHeart;
+    public int score=0;
+    public int health =3;
 
     FAQWindow() {
-        setLayout(new GridLayout(1, 3));
-
-        skip = new JLabel("<html>Press <font color='green'>L</font> to skip instruction</html>", SwingConstants.CENTER);
-        skip.setFont(new Font("SansSerif", Font.BOLD, 15));
-        add(skip);
-
-        content = new JLabel("<html>Press <font color='green'>SPACE</font> to jump</html>", SwingConstants.CENTER);
-        content.setFont(new Font("SansSerif", Font.BOLD, 21));
+        setLayout(new GridLayout(1, 2));
+        content = new JLabel();
+        content.setFont(new Font("SansSerif", Font.BOLD, 15));
+        content.setText("Ваш счёт: "+ score);
         add(content);
-
-        next = new JLabel("<html>Press <font color='green'>C</font> to continue</html>", SwingConstants.CENTER);
-        next.setFont(new Font("SansSerif", Font.BOLD, 15));
-        add(next);
-        setOpaque(false);
-
-        setVisible(true);
-    }
-
-    protected void changeTextJump() {
-        content.setText("<html>Press <font color='green'>A</font> and <font color='green'>D</font> to walk</html>");
-        MainWindow.getInstance().nowLayout = 2;
-    }
-
-    protected void changeTextWalk() {
-        content.setText("<html><font color='green'>Left Click</font> to attack</html>");
-        MainWindow.getInstance().nowLayout = 3;
-    }
-
-    protected void changeTextAttack() {
-        removeAll();
         try {
-            Image img = (Image) ImageIO.read(new File("res\\sprites\\HeartFull.png"));
-            fullHeart = new JLabel(new ImageIcon(img));
+            Image img = (Image) ImageIO.read(new File("res//sprites//HeartFull.png"));
+            fullHeart = new JLabel(new ImageIcon(img),SwingConstants.RIGHT);
             add(fullHeart);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         MainWindow.getInstance().nowLayout = 4;
         CharacterGame.getInstance().setPos(0, MainWindow.getInstance().j.getHeight()-CharacterGame.getInstance().character.getHeight(null)*2 - 70);
+        setOpaque(false);
+
+        setVisible(true);
     }
+
+    public void setScore(){
+        content.setText("Ваш счёт: "+ score);
+        score++;
+    }
+
+    public void twoHealth(){
+        Image img = null;
+        try {
+            img = (Image) ImageIO.read(new File("res//sprites//2Heart.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        changeImage(img);
+    }
+
+    private void changeImage(Image img) {
+        fullHeart.setIcon(new ImageIcon(img));
+        AnimationCharacter.getInstance().animationFrame = 0;
+        AnimationCharacter.getInstance().damage = 1;
+        MainWindow.getInstance().isWalk = false;
+        MainWindow.getInstance().isIdle = false;
+        MainWindow.getInstance().isJump = false;
+        MainWindow.getInstance().isDeath = false;
+        MainWindow.getInstance().isAttack = false;
+        MainWindow.getInstance().isDamage = true;
+        repaint();
+        revalidate();
+    }
+
+    public void oneHealth(){
+        Image img = null;
+        try {
+            img = (Image) ImageIO.read(new File("res//sprites//1Heart.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        changeImage(img);
+    }
+    public void zeroHealth(){
+        Image img = null;
+        try {
+            img = (Image) ImageIO.read(new File("res//sprites//0Heart.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        fullHeart.setIcon(new ImageIcon(img));
+        repaint();
+        revalidate();
+        AnimationCharacter.getInstance().animationFrame = 0;
+        AnimationCharacter.getInstance().death = 1;
+        while (true){
+            MainWindow.getInstance().isWalk = false;
+            MainWindow.getInstance().isIdle = false;
+            MainWindow.getInstance().isJump = false;
+            MainWindow.getInstance().isDeath = true;
+            MainWindow.getInstance().isAttack = false;
+            MainWindow.getInstance().isDamage = false;
+        }
+    }
+
 }
