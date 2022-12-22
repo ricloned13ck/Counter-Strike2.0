@@ -1,3 +1,8 @@
+package model;
+
+import controller.MainWindow;
+import view.FAQWindow;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +19,7 @@ public class CharacterGame extends JPanel {
     }
 
     private int width, height;
-    private int x,y;
+    private int x, y;
 
 
     public Image character;
@@ -32,12 +37,13 @@ public class CharacterGame extends JPanel {
         this.width = mainWindow.j.getWidth();
         this.height = mainWindow.j.getHeight();
         this.x = width / 2;
-        this.y = height-character.getHeight(null)*2 - 70;
+        this.y = height - character.getHeight(null) * 2 - 70;
 
     }
-    public void setPos(int x, int y){
-        this.x=x;
-        this.y=y;
+
+    public void setPos(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -53,20 +59,26 @@ public class CharacterGame extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(character.getScaledInstance(character.getWidth(null)*2, character.getHeight(null)*2, Image.SCALE_DEFAULT), x, y, null);
+        g.drawImage(character.getScaledInstance(character.getWidth(null) * 2, character.getHeight(null) * 2, Image.SCALE_DEFAULT), x, y, null);
     }
 
     public void setCharacter(Image character) {
         this.character = character;
     }
 
-    public void minusHealth(){
+    public void minusHealth() {
         FAQWindow.getInstance().health--;
-        if (FAQWindow.getInstance().health==2)
+        if (FAQWindow.getInstance().health == 2)
             FAQWindow.getInstance().twoHealth();
-        else if(FAQWindow.getInstance().health==1)
+        else if (FAQWindow.getInstance().health == 1)
             FAQWindow.getInstance().oneHealth();
         else
             FAQWindow.getInstance().zeroHealth();
+    }
+
+    public boolean getCanvas() {
+        if (instance != null)
+            return true;
+        return false;
     }
 }

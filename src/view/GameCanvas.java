@@ -1,3 +1,9 @@
+package view;
+
+import model.BulletGame;
+import model.CharacterGame;
+import model.MonsterGame;
+
 import javax.swing.*;
 import java.awt.*;
 

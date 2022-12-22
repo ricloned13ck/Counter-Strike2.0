@@ -1,3 +1,10 @@
+package model.animation;
+
+import controller.MainWindow;
+import controller.observers.CharacterEvent;
+import controller.observers.CharacterObserver;
+import model.CharacterGame;
+
 public class Walk extends Thread {
     private static Walk instance = null;
 
@@ -14,16 +21,18 @@ public class Walk extends Thread {
     @Override
     public void run() {
         while (true) {
-            int x1 = characterGame.getX() + x;
+            int y2 = characterGame.getY();
+            int x2=0;
             if (characterGame.getX()<=0){
-                characterGame.setPos(1, characterGame.getY());
+                x2 = 1;
             }
-            else if (characterGame.getX()>=MainWindow.getInstance().j.getWidth() - CharacterGame.getInstance().character.getWidth(null)){
-                characterGame.setPos(MainWindow.getInstance().j.getWidth()- CharacterGame.getInstance().character.getWidth(null), characterGame.getY());
+            else if (characterGame.getX()>= MainWindow.getInstance().j.getWidth() - CharacterGame.getInstance().character.getWidth(null)){
+                x2 = MainWindow.getInstance().j.getWidth()- CharacterGame.getInstance().character.getWidth(null);
             }
             else{
-                characterGame.setPos(x1, characterGame.getY());
+                x2 = characterGame.getX() + x;
             }
+            CharacterObserver.fireBallEvent(new CharacterEvent(x2, y2));
             try {
                 Thread.sleep(7);
             } catch (InterruptedException e) {

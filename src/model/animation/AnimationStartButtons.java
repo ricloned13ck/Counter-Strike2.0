@@ -1,9 +1,12 @@
+package model.animation;
+
+import controller.MainWindow;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class AnimationStartButtons extends Thread {
     private static AnimationStartButtons instance = null;

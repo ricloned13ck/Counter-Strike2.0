@@ -1,3 +1,7 @@
+package model;
+
+import controller.MainWindow;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

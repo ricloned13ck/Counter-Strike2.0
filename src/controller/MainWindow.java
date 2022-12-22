@@ -1,3 +1,13 @@
+package controller;
+
+import controller.observers.CharacterObserver;
+import controller.observers.CharacterPositionListener;
+import model.CharacterGame;
+import model.MonsterGame;
+import model.animation.*;
+import view.FAQWindow;
+import view.GameCanvas;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +24,9 @@ public class MainWindow {
         return instance;
     }
 
-    private Frame frame = Frame.getInstance();
-    private Canvas canvas = Canvas.getInstance();
+    private view.Frame frame = view.Frame.getInstance();
+    private view.Canvas canvas = view.Canvas.getInstance();
+    private Adapter adapter;
     private JLabel chooseCharacter;
     public LinkedList<JButton> characters = new LinkedList<>();
     public String[] characterImages = {"Woodcutter", "Cyborg", "LaraCroft"};
@@ -39,7 +50,7 @@ public class MainWindow {
     public boolean isDeath = false;
 
     public MainWindow() {
-        frame.setTitle("Counter-Strike 2.0");
+        frame.setTitle("StrikeShooter");
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
 
@@ -133,10 +144,11 @@ public class MainWindow {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(keyListener);
 
-
+        CharacterObserver.addListener(new CharacterPositionListener());
         Walk.getInstance().start();
         AnimationCharacter.getInstance().start();
         AnimationMonster.getInstance().start();
+        adapter = new Adapter(MonsterGame.getInstance(),CharacterGame.getInstance());
         BulletFlying.getInstance().start();
 
         frame.revalidate();

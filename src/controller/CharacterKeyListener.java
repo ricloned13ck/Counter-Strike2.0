@@ -1,6 +1,11 @@
+package controller;
+
+import model.animation.AnimationCharacter;
+import model.animation.Jump;
+import model.animation.Walk;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class CharacterKeyListener implements KeyEventDispatcher {
     private static CharacterKeyListener instance = null;

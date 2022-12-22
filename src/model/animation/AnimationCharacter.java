@@ -1,3 +1,11 @@
+package model.animation;
+
+import controller.MainWindow;
+import model.MonsterGame;
+import model.CharacterGame;
+import view.FAQWindow;
+import view.Frame;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -55,12 +63,11 @@ public class AnimationCharacter extends Thread {
                     Thread.sleep(65);
                 } else if (MainWindow.getInstance().isDamage) {
                     if (damage % 4 == 0) {
-                        MainWindow.getInstance().isDamage=false;
-                        if (Walk.getInstance().x==0){
+                        MainWindow.getInstance().isDamage = false;
+                        if (Walk.getInstance().x == 0) {
                             MainWindow.getInstance().isIdle = true;
                             MainWindow.getInstance().isWalk = false;
-                        }
-                        else{
+                        } else {
                             MainWindow.getInstance().isIdle = false;
                             MainWindow.getInstance().isWalk = true;
                         }
@@ -78,50 +85,45 @@ public class AnimationCharacter extends Thread {
                     if (death % 7 == 0) {
                         MainWindow.getInstance().isIdle = true;
                         MainWindow.getInstance().isDeath = false;
-                        int result = JOptionPane.showConfirmDialog(Frame.getInstance(), "Вы набрали "+FAQWindow.getInstance().score +" очков. Поздравляем!!!");
-                        if (result == JOptionPane.YES_OPTION) {
-                            System.exit(0);
-                        }
-                        else System.exit(0);
+                        JOptionPane.showMessageDialog(Frame.getInstance(), "Вы набрали " + FAQWindow.getInstance().score + " очков. Поздравляем!!!");
+                        System.exit(0);
                     }
                     if (Objects.equals(MainWindow.getInstance().nowPos, "RIGHT"))
                         image = (Image) ImageIO.read(new File("res//sprites//death//" + MainWindow.getInstance().mainCharacter + animationFrame % 6 + ".png"));
                     else
                         image = (Image) ImageIO.read(new File("res//sprites//death//L" + MainWindow.getInstance().mainCharacter + animationFrame % 6 + ".png"));
                     CharacterGame.getInstance().setCharacter(image);
-                    CharacterGame.getInstance().setPos(CharacterGame.getInstance().getX(),CharacterGame.getInstance().getY()+8);
+                    CharacterGame.getInstance().setPos(CharacterGame.getInstance().getX(), CharacterGame.getInstance().getY() + 8);
                     animationFrame++;
                     death++;
                     Thread.sleep(65);
                 } else if (MainWindow.getInstance().isAttack) {
-                    if (MainWindow.getInstance().nowPos=="RIGHT"){
-                        int gun = CharacterGame.getInstance().getX()+CharacterGame.getInstance().character.getWidth(null);
+                    if (Objects.equals(MainWindow.getInstance().nowPos, "RIGHT")) {
+                        int gun = CharacterGame.getInstance().getX() + CharacterGame.getInstance().character.getWidth(null);
                         int monster = MonsterGame.getInstance().getX();
-                        int sizeMonster = MonsterGame.getInstance().getX()+MonsterGame.getInstance().character.getWidth(null);
-                        if(gun>=monster && gun<=sizeMonster && flag){
-                            MonsterGame.getInstance().isHurt=true;
+                        int sizeMonster = MonsterGame.getInstance().getX() + MonsterGame.getInstance().character.getWidth(null);
+                        if (gun >= monster && gun <= sizeMonster && flag) {
+                            MonsterGame.getInstance().isHurt = true;
                             MonsterGame.getInstance().health--;
                             flag = false;
                         }
-                    }
-                    else{
+                    } else {
                         int gun = CharacterGame.getInstance().getX();
                         int monster = MonsterGame.getInstance().getX();
-                        int sizeMonster = MonsterGame.getInstance().getX()+MonsterGame.getInstance().character.getWidth(null);
-                        if(gun>=monster && gun<=sizeMonster && flag){
-                            MonsterGame.getInstance().isHurt=true;
+                        int sizeMonster = MonsterGame.getInstance().getX() + MonsterGame.getInstance().character.getWidth(null);
+                        if (gun >= monster && gun <= sizeMonster && flag) {
+                            MonsterGame.getInstance().isHurt = true;
                             flag = false;
                             MonsterGame.getInstance().health--;
                         }
                     }
                     if (attack % 7 == 0) {
                         flag = true;
-                        MainWindow.getInstance().isAttack=false;
-                        if (Walk.getInstance().x==0){
+                        MainWindow.getInstance().isAttack = false;
+                        if (Walk.getInstance().x == 0) {
                             MainWindow.getInstance().isIdle = true;
                             MainWindow.getInstance().isWalk = false;
-                        }
-                        else{
+                        } else {
                             MainWindow.getInstance().isIdle = false;
                             MainWindow.getInstance().isWalk = true;
                         }

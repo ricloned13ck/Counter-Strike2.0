@@ -1,3 +1,10 @@
+package model.animation;
+
+import controller.MainWindow;
+import model.MonsterGame;
+import model.BulletGame;
+import model.CharacterGame;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;

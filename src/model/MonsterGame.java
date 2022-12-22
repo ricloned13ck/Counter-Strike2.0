@@ -1,3 +1,7 @@
+package model;
+
+import controller.MainWindow;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,14 +18,15 @@ public class MonsterGame extends JPanel {
     }
 
     public int width, height;
-    private int x,y;
-    public int pos=1;
-    public int health=3;
+    private int x, y;
+    public int pos = 1;
+    public int health = 3;
 
 
     public Image character;
     private MainWindow mainWindow = MainWindow.getInstance();
     public boolean isHurt = false;
+
     private MonsterGame() {
         super(true);
 
@@ -33,14 +38,15 @@ public class MonsterGame extends JPanel {
         }
         this.width = mainWindow.j.getWidth();
         this.height = mainWindow.j.getHeight();
-        this.x = width-this.character.getWidth(null)*3;
-        this.y = height-character.getHeight(null)*3-5;
+        this.x = width - this.character.getWidth(null) * 3;
+        this.y = height - character.getHeight(null) * 3 - 5;
 
     }
-    public void setPos(int x, int y, int pos){
-        this.pos=pos;
-        this.x=x;
-        this.y=y;
+
+    public void setPos(int x, int y, int pos) {
+        this.pos = pos;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -56,10 +62,16 @@ public class MonsterGame extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(character.getScaledInstance((int) (character.getWidth(null)*1.5), (int) (character.getHeight(null)*1.5), Image.SCALE_DEFAULT), x, y, null);
+        g.drawImage(character.getScaledInstance((int) (character.getWidth(null) * 1.5), (int) (character.getHeight(null) * 1.5), Image.SCALE_DEFAULT), x, y, null);
     }
+
     public void setCharacter(Image character) {
         this.character = character;
     }
 
+    public boolean getCanvas() {
+        if (instance != null)
+            return true;
+        return false;
+    }
 }
