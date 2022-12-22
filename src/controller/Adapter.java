@@ -23,7 +23,7 @@ public class Adapter implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (!monsterGame.getCanvas())
             MonsterGame.getInstance();
-        if(!characterGame.getCanvas())
+        if (!characterGame.getCanvas())
             CharacterGame.getInstance();
     }
 }

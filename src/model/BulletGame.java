@@ -34,7 +34,7 @@ public class BulletGame extends JPanel {
         this.width = mainWindow.j.getWidth();
         this.height = mainWindow.j.getHeight();
         this.x = MonsterGame.getInstance().getX();
-        this.y = MonsterGame.getInstance().getY()+10;
+        this.y = MonsterGame.getInstance().getY() + 10;
     }
 
     public void setPos(int x, int y) {

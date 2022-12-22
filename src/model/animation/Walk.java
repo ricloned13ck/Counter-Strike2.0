@@ -22,14 +22,12 @@ public class Walk extends Thread {
     public void run() {
         while (true) {
             int y2 = characterGame.getY();
-            int x2=0;
-            if (characterGame.getX()<=0){
+            int x2 = 0;
+            if (characterGame.getX() <= 0) {
                 x2 = 1;
-            }
-            else if (characterGame.getX()>= MainWindow.getInstance().j.getWidth() - CharacterGame.getInstance().character.getWidth(null)){
-                x2 = MainWindow.getInstance().j.getWidth()- CharacterGame.getInstance().character.getWidth(null);
-            }
-            else{
+            } else if (characterGame.getX() >= MainWindow.getInstance().j.getWidth() - CharacterGame.getInstance().character.getWidth(null)) {
+                x2 = MainWindow.getInstance().j.getWidth() - CharacterGame.getInstance().character.getWidth(null);
+            } else {
                 x2 = characterGame.getX() + x;
             }
             CharacterObserver.fireBallEvent(new CharacterEvent(x2, y2));

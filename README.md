@@ -1,0 +1,1 @@
+Скачать https://www.oracle.com/java/technologies/downloads/#jdk19-windows -> перекинуть в папку jdk19 -> открыть CMD -> cd путь к папке с файлами -> jdk19\bin\java -jar StrikeShooter.jar

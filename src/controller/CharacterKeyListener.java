@@ -20,7 +20,7 @@ public class CharacterKeyListener implements KeyEventDispatcher {
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
-            if ((e.getKeyCode() == 32 || e.getKeyCode()  == 38 || e.getKeyCode() ==87) && !MainWindow.getInstance().isJump) {
+            if ((e.getKeyCode() == 32 || e.getKeyCode() == 38 || e.getKeyCode() == 87) && !MainWindow.getInstance().isJump) {
                 AnimationCharacter.getInstance().animationFrame = 0;
                 MainWindow.getInstance().isWalk = false;
                 MainWindow.getInstance().isIdle = false;
@@ -53,10 +53,9 @@ public class CharacterKeyListener implements KeyEventDispatcher {
 
             } else if (e.getKeyCode() == 76) {
                 MainWindow.getInstance().nowLayout = 4;
-            }
-            else if ((e.getKeyCode()== 75 || e.getKeyCode()==17 ) && !MainWindow.getInstance().isAttack && !MainWindow.getInstance().isJump){
-                AnimationCharacter.getInstance().animationFrame=0;
-                AnimationCharacter.getInstance().attack=1;
+            } else if ((e.getKeyCode() == 75 || e.getKeyCode() == 17) && !MainWindow.getInstance().isAttack && !MainWindow.getInstance().isJump) {
+                AnimationCharacter.getInstance().animationFrame = 0;
+                AnimationCharacter.getInstance().attack = 1;
                 MainWindow.getInstance().isWalk = false;
                 MainWindow.getInstance().isIdle = false;
                 MainWindow.getInstance().isJump = false;

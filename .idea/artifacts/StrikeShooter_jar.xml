@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="StrikeShooter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/StrikeShooter_jar</output-path>
+    <root id="archive" name="StrikeShooter.jar">
+      <element id="module-output" name="StrikeShooter" />
+    </root>
+  </artifact>
+</component>

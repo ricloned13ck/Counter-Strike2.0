@@ -148,7 +148,7 @@ public class MainWindow {
         Walk.getInstance().start();
         AnimationCharacter.getInstance().start();
         AnimationMonster.getInstance().start();
-        adapter = new Adapter(MonsterGame.getInstance(),CharacterGame.getInstance());
+        adapter = new Adapter(MonsterGame.getInstance(), CharacterGame.getInstance());
         BulletFlying.getInstance().start();
 
         frame.revalidate();

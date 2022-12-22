@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Counter-Strike 2.0.iml" filepath="$PROJECT_DIR$/Counter-Strike 2.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StrikeShooter.iml" filepath="$PROJECT_DIR$/StrikeShooter.iml" />
     </modules>
   </component>
 </project>

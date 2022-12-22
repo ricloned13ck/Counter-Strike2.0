@@ -16,26 +16,25 @@ public class Jump extends Thread {
     @Override
     public void run() {
         int b = 0;
-        MainWindow.getInstance().isJump =true;
+        MainWindow.getInstance().isJump = true;
         while (true) {
-            MainWindow.getInstance().isIdle=false;
-            MainWindow.getInstance().isWalk=false;
-            if (b==highJump){
-                y=1;
+            MainWindow.getInstance().isIdle = false;
+            MainWindow.getInstance().isWalk = false;
+            if (b == highJump) {
+                y = 1;
             }
             if (b >= 2 * highJump) {
-                CharacterObserver.fireBallEvent(new CharacterEvent(characterGame.getX(), MainWindow.getInstance().j.getHeight()-CharacterGame.getInstance().character.getHeight(null)*2 - 70));
-                if (Walk.getInstance().x!=0){
-                    MainWindow.getInstance().isIdle=false;
-                    MainWindow.getInstance().isWalk=true;
-                }
-                else{
-                    MainWindow.getInstance().isIdle=true;
-                    MainWindow.getInstance().isWalk=false;
+                CharacterObserver.fireBallEvent(new CharacterEvent(characterGame.getX(), MainWindow.getInstance().j.getHeight() - CharacterGame.getInstance().character.getHeight(null) * 2 - 70));
+                if (Walk.getInstance().x != 0) {
+                    MainWindow.getInstance().isIdle = false;
+                    MainWindow.getInstance().isWalk = true;
+                } else {
+                    MainWindow.getInstance().isIdle = true;
+                    MainWindow.getInstance().isWalk = false;
                 }
 
-                MainWindow.getInstance().isJump =false;
-                MainWindow.getInstance().isAttack=false;
+                MainWindow.getInstance().isJump = false;
+                MainWindow.getInstance().isAttack = false;
                 return;
             }
             b += 1;

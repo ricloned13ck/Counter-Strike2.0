@@ -28,13 +28,13 @@ public class BulletFlying extends Thread {
             double a = Math.random() * 800 + 800;
             if (animation >= a) {
                 animation = 0;
-                if (MonsterGame.getInstance().pos==0)
-                    BulletGame.getInstance().setPos(MonsterGame.getInstance().getX()+20, MonsterGame.getInstance().getY()+10);
+                if (MonsterGame.getInstance().pos == 0)
+                    BulletGame.getInstance().setPos(MonsterGame.getInstance().getX() + 20, MonsterGame.getInstance().getY() + 10);
                 else
-                    BulletGame.getInstance().setPos(MonsterGame.getInstance().getX(), MonsterGame.getInstance().getY()+10);
+                    BulletGame.getInstance().setPos(MonsterGame.getInstance().getX(), MonsterGame.getInstance().getY() + 10);
             }
-            if (CharacterGame.getInstance().getX()<=BulletGame.getInstance().getX() && BulletGame.getInstance().getX()<=CharacterGame.getInstance().getX()+CharacterGame.getInstance().character.getWidth(null) && (MainWindow.getInstance().isWalk || MainWindow.getInstance().isIdle)){
-                BulletGame.getInstance().setPos(-1000,-1000);
+            if (CharacterGame.getInstance().getX() <= BulletGame.getInstance().getX() && BulletGame.getInstance().getX() <= CharacterGame.getInstance().getX() + CharacterGame.getInstance().character.getWidth(null) && (MainWindow.getInstance().isWalk || MainWindow.getInstance().isIdle)) {
+                BulletGame.getInstance().setPos(-1000, -1000);
                 CharacterGame.getInstance().minusHealth();
             }
 
